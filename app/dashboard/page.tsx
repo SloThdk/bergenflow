@@ -87,6 +87,12 @@ export default function DashboardPage() {
       </header>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "32px 24px" }}>
+        <div style={{ background: "rgba(232,93,4,0.06)", border: "1px solid rgba(232,93,4,0.18)", borderRadius: "8px", padding: "10px 16px", marginBottom: "20px", display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ fontSize: "10px", fontWeight: 800, color: "var(--orange)", background: "rgba(232,93,4,0.12)", padding: "2px 7px", borderRadius: "3px", letterSpacing: "0.08em", flexShrink: 0 }}>DEMO</span>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: 1.5 }}>
+            I produksjon vises dine faktiske bestillinger, treningshistorikk og abonnementsstatus her. Statistikk oppdateres i sanntid.
+          </p>
+        </div>
         <div style={{ marginBottom: "32px" }}>
           <h1 style={{ fontSize: "28px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "4px" }}>Hei, {member.name}</h1>
           <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>Her er oversikten din.</p>

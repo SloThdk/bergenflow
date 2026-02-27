@@ -112,6 +112,12 @@ export default function BookPage() {
                 {confirm.instructor} &middot; kl. {confirm.time} &middot; {confirm.duration} min &middot; {fmtFull(addDays(today, confirm.dayOffset))}
               </div>
             </div>
+            <div style={{ background: "rgba(232,93,4,0.06)", border: "1px solid rgba(232,93,4,0.15)", borderRadius: "8px", padding: "10px 14px", marginBottom: "16px" }}>
+              <p style={{ fontSize: "11px", color: "var(--text-muted)", lineHeight: 1.6 }}>
+                <span style={{ color: "var(--orange)", fontWeight: 700 }}>Demo — </span>
+                I produksjon sendes en bekreftelse til din e-post, og timen reserveres med ditt navn pa deltakerlisten.
+              </p>
+            </div>
             <div style={{ display: "flex", gap: "10px" }}>
               <button onClick={() => setConfirm(null)} style={{ flex: 1, padding: "12px", borderRadius: "8px", border: "1px solid var(--border-strong)", color: "var(--text-secondary)", fontWeight: 600 }}>Avbryt</button>
               <button onClick={confirmBooking} style={{ flex: 1, padding: "12px", borderRadius: "8px", background: "var(--orange)", color: "#fff", fontWeight: 700, fontSize: "14px" }}>Bekreft</button>

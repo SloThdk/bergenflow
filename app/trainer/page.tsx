@@ -77,6 +77,12 @@ export default function TrainerPage() {
       </header>
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "32px 24px" }}>
+        <div style={{ background: "rgba(123,163,196,0.06)", border: "1px solid rgba(123,163,196,0.18)", borderRadius: "8px", padding: "10px 16px", marginBottom: "20px", display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ fontSize: "10px", fontWeight: 800, color: "#7BA3C4", background: "rgba(123,163,196,0.12)", padding: "2px 7px", borderRadius: "3px", letterSpacing: "0.08em", flexShrink: 0 }}>DEMO</span>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)", lineHeight: 1.5 }}>
+            I produksjon vises dine faktiske klasser og deltakerlister her. Deltakere melder seg pa via kundeporten — du ser navnene i sanntid.
+          </p>
+        </div>
         <div style={{ marginBottom: "32px" }}>
           <h1 style={{ fontSize: "28px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "4px" }}>Hei, {trainer.split(" ")[0]}</h1>
           <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>Din ukentlige timeplan og deltakerlister.</p>

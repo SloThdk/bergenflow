@@ -110,7 +110,10 @@ export default function OwnerPage() {
             <h1 style={{ fontSize: "28px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "4px" }}>Oversikt</h1>
             <p style={{ color: "var(--text-muted)", fontSize: "14px" }}>Bergen Fitness — {today.toLocaleDateString("no-NO", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</p>
           </div>
-          <span style={{ fontSize: "10px", fontWeight: 700, color: "#B8985A", background: "rgba(184,152,90,0.1)", border: "1px solid rgba(184,152,90,0.2)", padding: "4px 10px", borderRadius: "4px" }}>Demo</span>
+          <div style={{ textAlign: "right" }}>
+            <span style={{ fontSize: "10px", fontWeight: 700, color: "#B8985A", background: "rgba(184,152,90,0.1)", border: "1px solid rgba(184,152,90,0.2)", padding: "4px 10px", borderRadius: "4px" }}>Demo</span>
+            <p style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "5px", maxWidth: "220px" }}>I produksjon kobles dette til ekte betalinger, bookinger og medlemsdata.</p>
+          </div>
         </div>
 
         {/* KPI STRIP */}
