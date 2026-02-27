@@ -135,6 +135,61 @@ export default function LoginPage() {
           {authMode === "signup" && (
             <p style={{ color: "var(--text-muted)", fontSize: "12px", textAlign: "center", marginTop: "12px" }}>7 dager gratis · Ingen bindingstid</p>
           )}
+
+          {/* Access level switcher */}
+          <div style={{ marginTop: "32px", paddingTop: "28px", borderTop: "1px solid var(--border)" }}>
+            <p style={{ fontSize: "10px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "14px" }}>Prøv hvert tilgangsnivå</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+
+              {/* Kunde */}
+              <div style={{ display: "flex", alignItems: "center", gap: "14px", padding: "14px 16px", background: "var(--surface)", border: "1px solid var(--border-strong)", borderRadius: "10px" }}>
+                <div style={{ width: "36px", height: "36px", borderRadius: "8px", background: "rgba(255,255,255,0.05)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Kunde</div>
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px" }}>Valgfri e-post og passord</div>
+                </div>
+                <span style={{ fontSize: "11px", color: "var(--text-muted)", background: "var(--surface-2)", padding: "4px 10px", borderRadius: "20px", whiteSpace: "nowrap" }}>Denne siden</span>
+              </div>
+
+              {/* Trener */}
+              <button
+                onClick={() => { try { sessionStorage.setItem("bf_trainer", "Erik Hansen"); } catch {} window.location.href = "/trainer"; }}
+                style={{ display: "flex", alignItems: "center", gap: "14px", padding: "14px 16px", background: "var(--surface)", border: "1px solid rgba(232,93,4,0.3)", borderRadius: "10px", textAlign: "left" as const, cursor: "pointer", width: "100%", transition: "border-color 0.15s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--orange)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(232,93,4,0.3)"; }}
+              >
+                <div style={{ width: "36px", height: "36px", borderRadius: "8px", background: "rgba(232,93,4,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Trener</div>
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px", fontFamily: "monospace" }}>erik@bergenfitness.no</div>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+              {/* Eier */}
+              <button
+                onClick={() => { window.location.href = "/owner"; }}
+                style={{ display: "flex", alignItems: "center", gap: "14px", padding: "14px 16px", background: "var(--surface)", border: "1px solid rgba(184,152,90,0.3)", borderRadius: "10px", textAlign: "left" as const, cursor: "pointer", width: "100%", transition: "border-color 0.15s" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#B8985A"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(184,152,90,0.3)"; }}
+              >
+                <div style={{ width: "36px", height: "36px", borderRadius: "8px", background: "rgba(184,152,90,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M2 9h4l2-6 2 12 2-6h4" stroke="#B8985A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>Eier</div>
+                  <div style={{ fontSize: "11px", color: "var(--text-muted)", marginTop: "2px", fontFamily: "monospace" }}>owner@bergenfitness.no</div>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B8985A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+
+            </div>
+          </div>
+
         </div>
       </div>
 
