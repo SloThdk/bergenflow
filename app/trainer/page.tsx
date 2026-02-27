@@ -88,7 +88,7 @@ export default function TrainerPage() {
       {/* SETTINGS DRAWER */}
       {settingsOpen && (
         <div style={{position:"fixed", inset:0, zIndex:200}} onClick={e => e.target === e.currentTarget && setSettingsOpen(false)}>
-          <div style={{position:"absolute", right:0, top:0, bottom:0, width:"440px", background:"var(--surface)", borderLeft:"1px solid var(--border-strong)", display:"flex", flexDirection:"column", animation:"slideIn 0.18s ease-out"}}>
+          <div className="drawer" style={{position:"absolute", right:0, top:0, bottom:0, width:"440px", background:"var(--surface)", borderLeft:"1px solid var(--border-strong)", display:"flex", flexDirection:"column", animation:"slideIn 0.18s ease-out"}}>
             <style>{`@keyframes slideIn { from { transform: translateX(30px); opacity: 0 } to { transform: none; opacity: 1 } }`}</style>
 
             {/* Drawer header */}
@@ -288,7 +288,7 @@ export default function TrainerPage() {
         </div>
 
         {/* KPI STRIP */}
-        <div style={{display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:"12px", marginBottom:"28px"}}>
+        <div className="kpi-4" style={{display:"grid", gridTemplateColumns:"repeat(4, 1fr)", gap:"12px", marginBottom:"28px"}}>
           {[
             {label:"Timer denne uken", value:String(totalWeek),        accent:trainer.accent},
             {label:"Påmeldte totalt",  value:String(totalAttendees),   accent:"var(--orange)"},
@@ -361,7 +361,7 @@ export default function TrainerPage() {
                   {isExpanded && (
                     <div style={{borderTop:"1px solid var(--border)", padding:"18px 22px"}}>
                       <div style={{fontSize:"11px", fontWeight:700, color:"var(--text-muted)", textTransform:"uppercase", letterSpacing:"0.08em", marginBottom:"12px"}}>Deltakerliste ({cls.attendees.length})</div>
-                      <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(180px, 1fr))", gap:"6px"}}>
+                      <div className="att-grid" style={{display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(180px, 1fr))", gap:"6px"}}>
                         {cls.attendees.map((name, i) => (
                           <div key={i} style={{display:"flex", alignItems:"center", gap:"9px", padding:"9px 12px", background:"var(--surface-2)", borderRadius:"7px", fontSize:"13px"}}>
                             <div style={{width:"26px", height:"26px", borderRadius:"50%", background:`${cls.color}20`, border:`1px solid ${cls.color}30`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"10px", fontWeight:700, color:cls.color, flexShrink:0}}>

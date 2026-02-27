@@ -138,7 +138,7 @@ export default function OwnerPage() {
         </div>
 
         {/* KPI STRIP */}
-        <div style={{display:"grid", gridTemplateColumns:"repeat(5, 1fr)", gap:"10px", marginBottom:"24px"}}>
+        <div className="kpi-5" style={{display:"grid", gridTemplateColumns:"repeat(5, 1fr)", gap:"10px", marginBottom:"24px"}}>
           {[
             {label:"Omsetning",            value:rev.total,       accent:"#22c55e",  icon:"M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 14.5V18h-2v-1.5c-1.4-.3-2.5-1.3-2.5-2.5h2c0 .6.7 1 1.5 1s1.5-.4 1.5-1-.5-1-1.5-1.3C10.2 12.2 9 11.2 9 9.5c0-1.2 1.1-2.2 2.5-2.5V5.5h2V7c1.4.3 2.5 1.3 2.5 2.5h-2c0-.6-.7-1-1.5-1s-1.5.4-1.5 1 .5 1 1.5 1.3c1.8.5 3 1.5 3 3.2 0 1.2-1.1 2.2-2.5 2.5z"},
             {label:"Aktive medlemmer",     value:rev.members,     accent:"#E85D04",  icon:"M17 20h5v-2a3 3 0 0 0-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 0 1 5.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 0 1 9.288 0M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"},
@@ -182,7 +182,7 @@ export default function OwnerPage() {
         </div>
 
         {/* ROW 2: Today schedule + Top classes */}
-        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px", marginBottom:"20px"}}>
+        <div className="two-col" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px", marginBottom:"20px"}}>
 
           {/* TODAY'S SCHEDULE */}
           <div style={{background:"var(--surface)", border:"1px solid var(--border)", borderRadius:"12px", padding:"22px"}}>
@@ -252,7 +252,7 @@ export default function OwnerPage() {
         </div>
 
         {/* ROW 3: Recent sign-ups + Trainer performance */}
-        <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px", marginBottom:"20px"}}>
+        <div className="two-col" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"20px", marginBottom:"20px"}}>
 
           {/* RECENT SIGN-UPS */}
           <div style={{background:"var(--surface)", border:"1px solid var(--border)", borderRadius:"12px", padding:"22px"}}>

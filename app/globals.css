@@ -47,3 +47,21 @@ a { color: inherit; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+/* -- Mobile responsive overrides ------------------------ */
+@media (max-width: 1024px) {
+  .kpi-5 { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 768px) {
+  .kpi-4, .kpi-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .kpi-3         { grid-template-columns: repeat(3, 1fr) !important; }
+  .two-col       { grid-template-columns: 1fr !important; }
+  .four-col      { grid-template-columns: repeat(2, 1fr) !important; }
+  .drawer        { width: 100% !important; }
+  .hide-sm       { display: none !important; }
+  .stack-sm      { flex-direction: column !important; }
+}
+@media (max-width: 480px) {
+  .kpi-4, .kpi-5, .kpi-3 { grid-template-columns: repeat(2, 1fr) !important; }
+  .four-col { grid-template-columns: 1fr 1fr !important; }
+  .att-grid { grid-template-columns: 1fr !important; }
+}

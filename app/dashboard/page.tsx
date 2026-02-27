@@ -99,7 +99,7 @@ export default function DashboardPage() {
         </div>
 
         {/* KPI STRIP */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "32px" }}>
+        <div className="kpi-4" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "12px", marginBottom: "32px" }}>
           {[
             { label: "Abonnement", value: member.plan, sub: `kr ${planPrices[member.plan] || 549}/mnd`, accent: planColor[member.plan] || "var(--orange)" },
             { label: "Kommende timer", value: String(upcoming.length), sub: "denne uken", accent: "var(--orange)" },
@@ -114,7 +114,7 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
+        <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
           {/* UPCOMING */}
           <div>
             <h2 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "14px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
