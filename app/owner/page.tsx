@@ -12,11 +12,11 @@ const REVENUE: Record<Period, { labels: string[]; values: number[]; total: strin
 };
 
 const TODAY_SCHEDULE = [
-  { time:"06:00", name:"HIIT-\u00d8kt",     trainer:"Erik Hansen",  trainerPhoto:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=40&h=40&fit=crop&crop=face", booked:17, max:20, color:"#EF4444" },
-  { time:"09:00", name:"Morgen-Yoga",  trainer:"Lise Dahl",    trainerPhoto:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=40&h=40&fit=crop&crop=face", booked:10, max:18, color:"#8B5CF6" },
-  { time:"12:00", name:"Styrkesirkel", trainer:"Mads Berg",    trainerPhoto:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=40&h=40&fit=crop",           booked:16, max:16, color:"#F97316" },
-  { time:"18:00", name:"Spinning",     trainer:"Sara Moe",     trainerPhoto:"https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=40&h=40&fit=crop&crop=face", booked:17, max:22, color:"#06B6D4" },
-  { time:"19:30", name:"Boksing",      trainer:"Erik Hansen",  trainerPhoto:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=40&h=40&fit=crop&crop=face", booked:12, max:14, color:"#DC2626" },
+  { time:"06:00", name:"HIIT-\u00d8kt",     trainer:"Erik Hansen",  trainerPhoto:"https://images.pexels.com/photos/5209197/pexels-photo-5209197.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&fit=crop", booked:17, max:20, color:"#EF4444" },
+  { time:"09:00", name:"Morgen-Yoga",  trainer:"Lise Dahl",    trainerPhoto:"https://images.pexels.com/photos/6916300/pexels-photo-6916300.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&fit=crop", booked:10, max:18, color:"#8B5CF6" },
+  { time:"12:00", name:"Styrkesirkel", trainer:"Mads Berg",    trainerPhoto:"https://images.pexels.com/photos/14762174/pexels-photo-14762174.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&fit=crop",           booked:16, max:16, color:"#F97316" },
+  { time:"18:00", name:"Spinning",     trainer:"Sara Moe",     trainerPhoto:"https://images.pexels.com/photos/5669172/pexels-photo-5669172.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&fit=crop", booked:17, max:22, color:"#06B6D4" },
+  { time:"19:30", name:"Boksing",      trainer:"Erik Hansen",  trainerPhoto:"https://images.pexels.com/photos/5209197/pexels-photo-5209197.jpeg?auto=compress&cs=tinysrgb&w=40&h=40&fit=crop", booked:12, max:14, color:"#DC2626" },
 ];
 
 const TOP_CLASSES = [
@@ -29,10 +29,10 @@ const TOP_CLASSES = [
 ];
 
 const TRAINERS_PERF = [
-  { name:"Erik Hansen",  photo:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&h=80&fit=crop&crop=face", classes:22, avgFill:91, rating:4.9, speciality:"HIIT & Boksing",     accent:"#EF4444" },
-  { name:"Mads Berg",    photo:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=80&h=80&fit=crop",           classes:18, avgFill:86, rating:4.8, speciality:"Styrke & CrossFit",   accent:"#F97316" },
-  { name:"Sara Moe",     photo:"https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=80&h=80&fit=crop&crop=face", classes:20, avgFill:78, rating:4.7, speciality:"Spinning & Kondisjon",accent:"#06B6D4" },
-  { name:"Lise Dahl",    photo:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face", classes:18, avgFill:72, rating:4.9, speciality:"Yoga & Pilates",      accent:"#8B5CF6" },
+  { name:"Erik Hansen",  photo:"https://images.pexels.com/photos/5209197/pexels-photo-5209197.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop", classes:22, avgFill:91, rating:4.9, speciality:"HIIT & Boksing",     accent:"#EF4444" },
+  { name:"Mads Berg",    photo:"https://images.pexels.com/photos/14762174/pexels-photo-14762174.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop",           classes:18, avgFill:86, rating:4.8, speciality:"Styrke & CrossFit",   accent:"#F97316" },
+  { name:"Sara Moe",     photo:"https://images.pexels.com/photos/5669172/pexels-photo-5669172.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop", classes:20, avgFill:78, rating:4.7, speciality:"Spinning & Kondisjon",accent:"#06B6D4" },
+  { name:"Lise Dahl",    photo:"https://images.pexels.com/photos/6916300/pexels-photo-6916300.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop", classes:18, avgFill:72, rating:4.9, speciality:"Yoga & Pilates",      accent:"#8B5CF6" },
 ];
 
 const RECENT_MEMBERS = [
