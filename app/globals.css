@@ -65,3 +65,28 @@ a { color: inherit; }
   .four-col { grid-template-columns: 1fr 1fr !important; }
   .att-grid { grid-template-columns: 1fr !important; }
 }
+
+/* ── Mobile responsive base (added by fix script) ── */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* ── Responsive grid/layout helpers ── */
+@media (max-width: 768px) {
+  .responsive-grid { grid-template-columns: 1fr !important; }
+  .responsive-grid-2 { grid-template-columns: 1fr !important; }
+  .brand-panel { display: none !important; }
+  .nav-links-desktop { display: none !important; }
+}
+
+/* ── Login page mobile fixes ── */
+@media (max-width: 768px) {
+  /* Brand panel hidden via .brand-panel rule already */
+  /* Ensure the login flex container stacks properly */
+  div[style*="display: flex"][style*="background: var(--bg)"] > div:not(.brand-panel) {
+    width: 100% !important;
+    padding: 32px 20px !important;
+  }
+}
+/* form-panel-mobile marker */
