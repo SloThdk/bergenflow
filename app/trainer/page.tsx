@@ -309,21 +309,18 @@ export default function TrainerPage() {
             </div>
           </div>
           <div style={{display:"flex", alignItems:"center", gap:"14px"}}>
-            {/* Trainer profile chip */}
-            <div style={{display:"flex", alignItems:"center", gap:"10px", padding:"6px 14px 6px 6px", background:"var(--surface)", border:"1px solid var(--border-strong)", borderRadius:"100px"}}>
-              <div style={{position:"relative", width:"32px", height:"32px", borderRadius:"50%", overflow:"hidden", border:`1.5px solid ${trainer.accent}60`}}>
+            {/* Trainer profile chip — clickable for settings */}
+            <button onClick={() => setSettingsOpen(true)} style={{display:"flex", alignItems:"center", gap:"10px", padding:"6px 14px 6px 6px", background:"var(--surface)", border:"1px solid var(--border-strong)", borderRadius:"100px", cursor:"pointer", transition:"border-color 0.15s"}}>
+              <div style={{position:"relative", width:"32px", height:"32px", borderRadius:"50%", overflow:"hidden", border:`2px solid ${trainer.accent}`}}>
                 <Image src={trainer.photo} alt={trainer.name} fill style={{objectFit:"cover"}}/>
               </div>
-              <div>
-                <div style={{fontSize:"13px", fontWeight:600, lineHeight:1.2}}>{trainer.name}</div>
+              <div style={{textAlign:"left"}}>
+                <div style={{fontSize:"13px", fontWeight:600, lineHeight:1.2, color:"var(--text)"}}>{trainer.name}</div>
                 <div style={{fontSize:"10px", color:"var(--text-muted)"}}>{trainer.speciality}</div>
               </div>
-            </div>
-            {/* Settings button */}
-            <button onClick={() => setSettingsOpen(true)} style={{width:"36px", height:"36px", borderRadius:"8px", background:"var(--surface)", border:"1px solid var(--border-strong)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)"}}>
-              <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" strokeWidth="1.4"/><path d="M17.7 7.5l-1.2-.7a6.9 6.9 0 0 0 0-1.6l1.2-.7a.9.9 0 0 0 .3-1.2l-1-1.7a.9.9 0 0 0-1.2-.3l-1.2.7a6.9 6.9 0 0 0-1.4-.8V-.1a.9.9 0 0 0-.9-.9H9.7a.9.9 0 0 0-.9.9V1a7 7 0 0 0-1.4.8L6.2 1a.9.9 0 0 0-1.2.3l-1 1.7a.9.9 0 0 0 .3 1.2l1.2.7a6.9 6.9 0 0 0 0 1.6L4.3 7.2a.9.9 0 0 0-.3 1.2l1 1.7a.9.9 0 0 0 1.2.3l1.2-.7a6.9 6.9 0 0 0 1.4.8V12c0 .5.4.9.9.9h2a.9.9 0 0 0 .9-.9V11a7 7 0 0 0 1.4-.8l1.2.7a.9.9 0 0 0 1.2-.3l1-1.7a.9.9 0 0 0-.4-1.4z" stroke="currentColor" strokeWidth="1.3"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" style={{color:"var(--text-muted)", marginLeft:"4px"}}><path d="M10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" strokeWidth="1.5"/><path d="M8.2 2.5l-.4-1.1a.9.9 0 00-.8-.6H5.8a.9.9 0 00-.8.6l-.4 1.1-1 .5L2.5 2.8a.9.9 0 00-1 .2L.6 4a.9.9 0 00-.2 1l.2 1.1-.5 1-1.1.4a.9.9 0 00-.6.8v1.5c0 .4.2.7.6.8l1.1.4.5 1-.2 1.1c-.1.3 0 .7.2 1l.9.9c.3.3.7.3 1 .2l1.1-.2 1 .5.4 1.1c.1.4.4.6.8.6h1.2c.4 0 .7-.2.8-.6l.4-1.1 1-.5 1.1.2c.3.1.7 0 1-.2l.9-.9c.3-.3.3-.7.2-1l-.2-1.1.5-1 1.1-.4c.4-.1.6-.4.6-.8V5.8a.9.9 0 00-.6-.8l-1.1-.4-.5-1 .2-1.1c.1-.3 0-.7-.2-1l-.9-.9a.9.9 0 00-1-.2l-1.1.2-1-.5z" stroke="currentColor" strokeWidth="1.2" transform="translate(3 3) scale(0.7)"/></svg>
             </button>
-            <button onClick={() => {try{sessionStorage.removeItem("bf_trainer");}catch{} window.location.href = "https://bergen-fitness.pages.dev";}} style={{color:"var(--text-muted)", fontSize:"13px", padding:"6px 12px", borderRadius:"6px", border:"1px solid var(--border-strong)"}}>Logg ut</button>
+            <button onClick={() => {try{sessionStorage.removeItem("bf_trainer");}catch{} window.location.href = "https://bergen-fitness.pages.dev";}} style={{background:"rgba(239,68,68,0.08)", border:"1px solid rgba(239,68,68,0.25)", color:"#f87171", fontSize:"13px", fontWeight:600, padding:"7px 14px", borderRadius:"6px", cursor:"pointer"}}>Logg ut</button>
           </div>
         </div>
       </header>
