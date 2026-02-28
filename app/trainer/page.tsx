@@ -60,14 +60,14 @@ export default function TrainerPage() {
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem("bf_trainer");
-      if (!raw) { router.push("/"); return; }
+      if (!raw) { window.location.href = "https://bergen-fitness.pages.dev"; return; }
       const match = Object.values(TRAINER_DATA).find(t => t.name.toLowerCase().includes(raw.toLowerCase()) || t.email.includes(raw.toLowerCase())) || Object.values(TRAINER_DATA)[0];
       setTrainer(match);
       setProfileForm({ name: match.name, email: match.email, phone: match.phone, speciality: match.speciality, bio: match.bio });
       const initAv: Record<string,boolean> = {};
       DAYS_NO.forEach((d,di) => HOURS.forEach(h => { initAv[`${di}-${h}`] = di < 5 && parseInt(h) >= 6 && parseInt(h) <= 19; }));
       setAvailability(initAv);
-    } catch { router.push("/"); }
+    } catch { window.location.href = "https://bergen-fitness.pages.dev"; }
   }, [router]);
 
   function handleSave() { setSaved(true); setTimeout(() => setSaved(false), 2200); }
@@ -256,7 +256,7 @@ export default function TrainerPage() {
             <button onClick={() => setSettingsOpen(true)} style={{width:"36px", height:"36px", borderRadius:"8px", background:"var(--surface)", border:"1px solid var(--border-strong)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--text-muted)"}}>
               <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" strokeWidth="1.4"/><path d="M17.7 7.5l-1.2-.7a6.9 6.9 0 0 0 0-1.6l1.2-.7a.9.9 0 0 0 .3-1.2l-1-1.7a.9.9 0 0 0-1.2-.3l-1.2.7a6.9 6.9 0 0 0-1.4-.8V-.1a.9.9 0 0 0-.9-.9H9.7a.9.9 0 0 0-.9.9V1a7 7 0 0 0-1.4.8L6.2 1a.9.9 0 0 0-1.2.3l-1 1.7a.9.9 0 0 0 .3 1.2l1.2.7a6.9 6.9 0 0 0 0 1.6L4.3 7.2a.9.9 0 0 0-.3 1.2l1 1.7a.9.9 0 0 0 1.2.3l1.2-.7a6.9 6.9 0 0 0 1.4.8V12c0 .5.4.9.9.9h2a.9.9 0 0 0 .9-.9V11a7 7 0 0 0 1.4-.8l1.2.7a.9.9 0 0 0 1.2-.3l1-1.7a.9.9 0 0 0-.4-1.4z" stroke="currentColor" strokeWidth="1.3"/></svg>
             </button>
-            <button onClick={() => {try{sessionStorage.removeItem("bf_trainer");}catch{} router.push("/");}} style={{color:"var(--text-muted)", fontSize:"13px", padding:"6px 12px", borderRadius:"6px", border:"1px solid var(--border-strong)"}}>Logg ut</button>
+            <button onClick={() => {try{sessionStorage.removeItem("bf_trainer");}catch{} window.location.href = "https://bergen-fitness.pages.dev";}} style={{color:"var(--text-muted)", fontSize:"13px", padding:"6px 12px", borderRadius:"6px", border:"1px solid var(--border-strong)"}}>Logg ut</button>
           </div>
         </div>
       </header>

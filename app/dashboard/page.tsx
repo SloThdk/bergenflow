@@ -41,11 +41,11 @@ export default function DashboardPage() {
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem("bf_member");
-      if (!raw) { router.push("/"); return; }
+      if (!raw) { window.location.href = "https://bergen-fitness.pages.dev"; return; }
       setMember(JSON.parse(raw));
       const b = sessionStorage.getItem("bf_bookings_flow");
       if (b) setBookedIds(JSON.parse(b));
-    } catch { router.push("/"); }
+    } catch { window.location.href = "https://bergen-fitness.pages.dev"; }
   }, [router]);
 
   function cancelBooking(id: string) {
@@ -80,7 +80,7 @@ export default function DashboardPage() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             <button onClick={() => router.push("/book")} style={{ background: "var(--orange)", color: "#fff", borderRadius: "6px", padding: "7px 16px", fontSize: "13px", fontWeight: 700 }}>Book en time</button>
-            <button onClick={() => { try { sessionStorage.removeItem("bf_member"); sessionStorage.removeItem("bf_bookings_flow"); } catch {} router.push("/"); }}
+            <button onClick={() => { try { sessionStorage.removeItem("bf_member"); sessionStorage.removeItem("bf_bookings_flow"); } catch {} window.location.href = "https://bergen-fitness.pages.dev"; }}
               style={{ color: "var(--text-muted)", fontSize: "13px" }}>Logg ut</button>
           </div>
         </div>

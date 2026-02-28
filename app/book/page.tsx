@@ -57,11 +57,11 @@ export default function BookPage() {
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem("bf_member");
-      if (!raw) { router.push("/"); return; }
+      if (!raw) { window.location.href = "https://bergen-fitness.pages.dev"; return; }
       setMember(JSON.parse(raw));
       const b = sessionStorage.getItem("bf_bookings_flow");
       if (b) setBooked(JSON.parse(b));
-    } catch { router.push("/"); }
+    } catch { window.location.href = "https://bergen-fitness.pages.dev"; }
   }, [router]);
 
   const days = Array.from({ length: 7 }, (_, i) => i);
@@ -142,7 +142,7 @@ export default function BookPage() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             <button onClick={() => router.push("/dashboard")} style={{ color: "var(--text-muted)", fontSize: "13px", fontWeight: 500 }}>Mine bestillinger</button>
-            <button onClick={() => { try { sessionStorage.removeItem("bf_member"); sessionStorage.removeItem("bf_bookings_flow"); } catch {} router.push("/"); }}
+            <button onClick={() => { try { sessionStorage.removeItem("bf_member"); sessionStorage.removeItem("bf_bookings_flow"); } catch {} window.location.href = "https://bergen-fitness.pages.dev"; }}
               style={{ color: "var(--text-muted)", fontSize: "13px" }}>Logg ut</button>
           </div>
         </div>

@@ -181,7 +181,7 @@ export default function OwnerPage() {
           <span style={{fontSize:"13px", color:"var(--text-secondary)"}}>{today.toLocaleDateString("no-NO",{weekday:"long", day:"numeric", month:"long", year:"numeric"})}</span>
           <div style={{display:"flex", alignItems:"center", gap:"12px"}}>
             <span style={{fontSize:"10px", fontWeight:700, color:"#B8985A", background:"rgba(184,152,90,0.1)", border:"1px solid rgba(184,152,90,0.2)", padding:"4px 10px", borderRadius:"4px"}}>DEMO</span>
-            <button onClick={()=>{try{sessionStorage.removeItem("bf_owner_bf");}catch{} router.push("/");}} style={{color:"var(--text-muted)", fontSize:"13px", padding:"6px 14px", border:"1px solid var(--border-strong)", borderRadius:"6px", background:"transparent", cursor:"pointer"}}>Logg ut</button>
+            <button onClick={()=>{try{sessionStorage.removeItem("bf_owner_bf");}catch{} window.location.href = "https://bergen-fitness.pages.dev";}} style={{color:"var(--text-muted)", fontSize:"13px", padding:"6px 14px", border:"1px solid var(--border-strong)", borderRadius:"6px", background:"transparent", cursor:"pointer"}}>Logg ut</button>
           </div>
         </div>
         <div style={{height:"2px", background:"linear-gradient(90deg, transparent, #E85D04, transparent)"}} />
