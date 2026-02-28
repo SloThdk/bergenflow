@@ -44,6 +44,53 @@ const ALL_CLASSES: ClassEntry[] = [
 const DAYS_NO = ["Man","Tir","Ons","Tor","Fre","Lør","Søn"];
 const HOURS = ["06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21"];
 
+function TrainerLogin({ onLogin }: { onLogin: (name: string) => void }) {
+  const [sel, setSel] = useState<string | null>(null);
+  const [pin, setPin] = useState("");
+  const [loading, setLoading] = useState(false);
+  const trainers = Object.values(TRAINER_DATA);
+  return (
+    <div style={{ minHeight: "100vh", background: "var(--bg)", display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
+      <div style={{ width: "100%", maxWidth: "480px" }}>
+        <div style={{ textAlign: "center", marginBottom: "28px" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", marginBottom: "8px" }}>
+            <div style={{ width: "32px", height: "32px", background: "var(--orange)", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9h4l2-6 2 12 2-6h4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </div>
+            <span style={{ fontFamily: "var(--font-syne)", fontSize: "20px", fontWeight: 800 }}>Bergen<span style={{ color: "var(--orange)" }}>Flow</span></span>
+          </div>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(232,93,4,0.1)", border: "1px solid rgba(232,93,4,0.25)", borderRadius: "4px", padding: "3px 10px" }}>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "var(--orange)" }} />
+            <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "var(--orange)" }}>Trenerportal</span>
+          </div>
+        </div>
+        <div style={{ background: "var(--surface)", border: "1px solid var(--border-strong)", borderRadius: "14px", padding: "28px" }}>
+          <h1 style={{ fontSize: "16px", fontWeight: 700, marginBottom: "4px" }}>Logg inn som trener</h1>
+          <p style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "20px" }}>Velg ditt navn og skriv pinkoden din.</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px", marginBottom: "18px" }}>
+            {trainers.map(t => (
+              <button key={t.name} onClick={() => setSel(t.name)} style={{ padding: "12px 8px", borderRadius: "10px", cursor: "pointer", background: sel === t.name ? `${t.accent}15` : "transparent", border: `1px solid ${sel === t.name ? t.accent + "55" : "var(--border-strong)"}`, display: "flex", alignItems: "center", gap: "10px", transition: "all 0.12s" }}>
+                <img src={t.photo} alt={t.name} style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover", border: `2px solid ${sel === t.name ? t.accent : "var(--border)"}`, opacity: sel === t.name ? 1 : 0.6 }} />
+                <div style={{ textAlign: "left" }}>
+                  <div style={{ fontSize: "12px", fontWeight: sel === t.name ? 700 : 500, color: sel === t.name ? "var(--text)" : "var(--text-secondary)" }}>{t.name}</div>
+                  <div style={{ fontSize: "10px", color: t.accent, opacity: sel === t.name ? 1 : 0.5 }}>{t.role}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+          <form onSubmit={e => { e.preventDefault(); if (!sel) return; setLoading(true); setTimeout(() => { try { sessionStorage.setItem("bf_trainer", sel); } catch {} setLoading(false); onLogin(sel); }, 600); }} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+            <input type="password" placeholder="Pinkode" value={pin} onChange={e => setPin(e.target.value)} style={{ width: "100%", background: "var(--surface-2)", border: "1px solid var(--border-strong)", borderRadius: "8px", padding: "10px 14px", color: "var(--text)", fontSize: "16px", letterSpacing: "0.3em", outline: "none", boxSizing: "border-box" as const }} />
+            <button type="submit" disabled={!sel || loading} style={{ background: !sel ? "var(--surface-2)" : "var(--orange)", color: !sel ? "var(--text-muted)" : "#fff", border: "none", borderRadius: "8px", padding: "12px", fontSize: "14px", fontWeight: 700, cursor: !sel ? "default" : "pointer" }}>{loading ? "Logger inn..." : "Logg inn"}</button>
+          </form>
+          <div style={{ marginTop: "12px", padding: "10px 12px", background: "rgba(232,93,4,0.05)", border: "1px solid rgba(232,93,4,0.12)", borderRadius: "8px" }}>
+            <p style={{ fontSize: "11px", color: "var(--text-muted)", margin: 0 }}><span style={{ color: "var(--orange)", fontWeight: 600 }}>Demo</span> — velg et navn og skriv en vilkaarlig pinkode.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function TrainerPage() {
   const router = useRouter();
   const [trainer, setTrainer]           = useState<typeof TRAINER_DATA[string] | null>(null);
@@ -55,20 +102,40 @@ export default function TrainerPage() {
   const [availability, setAvailability] = useState<Record<string,boolean>>({});
   const [notifications, setNotifications] = useState({ booking: true, cancel: true, change: false, report: true, reminder: true });
   const [profileForm, setProfileForm]   = useState({ name:"", email:"", phone:"", speciality:"", bio:"" });
+  const [loggedIn, setLoggedIn]         = useState(false);
+  const [checking, setChecking]         = useState(true);
+  const [toast, setToast]               = useState("");
   const today = useMemo(() => new Date(), []);
 
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem("bf_trainer");
-      if (!raw) { window.location.href = "https://bergen-fitness.pages.dev"; return; }
+      if (!raw) { setChecking(false); return; }
       const match = Object.values(TRAINER_DATA).find(t => t.name.toLowerCase().includes(raw.toLowerCase()) || t.email.includes(raw.toLowerCase())) || Object.values(TRAINER_DATA)[0];
       setTrainer(match);
       setProfileForm({ name: match.name, email: match.email, phone: match.phone, speciality: match.speciality, bio: match.bio });
       const initAv: Record<string,boolean> = {};
       DAYS_NO.forEach((d,di) => HOURS.forEach(h => { initAv[`${di}-${h}`] = di < 5 && parseInt(h) >= 6 && parseInt(h) <= 19; }));
       setAvailability(initAv);
-    } catch { window.location.href = "https://bergen-fitness.pages.dev"; }
+      setLoggedIn(true);
+    } catch {}
+    setChecking(false);
   }, [router]);
+
+  function handleLogin(name: string) {
+    const match = Object.values(TRAINER_DATA).find(t => t.name === name) || Object.values(TRAINER_DATA)[0];
+    setTrainer(match);
+    setProfileForm({ name: match.name, email: match.email, phone: match.phone, speciality: match.speciality, bio: match.bio });
+    const initAv: Record<string,boolean> = {};
+    DAYS_NO.forEach((d,di) => HOURS.forEach(h => { initAv[`${di}-${h}`] = di < 5 && parseInt(h) >= 6 && parseInt(h) <= 19; }));
+    setAvailability(initAv);
+    setLoggedIn(true);
+    setToast(`Logget inn som ${match.name}`);
+    setTimeout(() => setToast(""), 2500);
+  }
+
+  if (checking) return null;
+  if (!loggedIn) return <TrainerLogin onLogin={handleLogin} />;
 
   function handleSave() { setSaved(true); setTimeout(() => setSaved(false), 2200); }
 
@@ -384,6 +451,7 @@ export default function TrainerPage() {
         style={{position:"fixed", bottom:"24px", right:"24px", background:"var(--orange)", color:"#fff", borderRadius:"100px", padding:"10px 18px", fontSize:"12px", fontWeight:700, boxShadow:"0 4px 20px rgba(232,93,4,0.4)", zIndex:40, textDecoration:"none"}}>
         Bygget av Sloth Studio →
       </a>
+      {toast && <div style={{ position: "fixed", bottom: "24px", left: "50%", transform: "translateX(-50%)", background: "rgba(34,197,94,0.15)", border: "1px solid rgba(34,197,94,0.4)", borderRadius: "10px", padding: "12px 24px", color: "#86efac", fontSize: "14px", fontWeight: 600, zIndex: 300, whiteSpace: "nowrap", backdropFilter: "blur(8px)" }}>{toast}</div>}
     </div>
   );
 }
