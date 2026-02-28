@@ -185,7 +185,7 @@ export default function TrainerPage() {
                     <div>
                       <div style={{fontWeight:700, fontSize:"15px", marginBottom:"2px"}}>{trainer.name}</div>
                       <div style={{fontSize:"12px", color:"var(--text-muted)"}}>{trainer.role}</div>
-                      <button onClick={() => { const input = document.createElement("input"); input.type = "file"; input.accept = "image/*"; input.onchange = () => { setSaved(false); setTimeout(() => { setSaved(true); setTimeout(() => setSaved(false), 2200); }, 800); }; input.click(); }} style={{marginTop:"6px", fontSize:"11px", color:trainer.accent, fontWeight:600, textDecoration:"underline", background:"none", border:"none", cursor:"pointer", padding:0}}>Bytt profilbilde</button>
+                      <button onClick={() => { setToast("Profilbilde oppdatert"); setTimeout(() => setToast(""), 2500); }} style={{marginTop:"6px", fontSize:"11px", color:trainer.accent, fontWeight:600, textDecoration:"underline", background:"none", border:"none", cursor:"pointer", padding:0}}>Bytt profilbilde</button>
                     </div>
                   </div>
                   {[
