@@ -31,6 +31,78 @@ const CLASS_MAP: Record<string, Booking> = {
   c20: { id: "c20", name: "Boksing", category: "Boksing", instructor: "Erik Hansen", time: "18:00", duration: 60, dayOffset: 4, color: "#DC2626" },
 };
 
+function CalendarView({ classes, today }: { classes: Booking[]; today: Date }) {
+  const [monthOffset, setMonthOffset] = useState(0);
+  const base = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1);
+  const year = base.getFullYear();
+  const month = base.getMonth();
+  const firstDay = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const monthName = base.toLocaleDateString("no-NO", { month: "long", year: "numeric" });
+  const days = ["Man", "Tir", "Ons", "Tor", "Fre", "Lor", "Son"];
+  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+
+  function getClassesForDay(d: number) {
+    const target = new Date(year, month, d);
+    const diffDays = Math.round((target.getTime() - today.getTime()) / 86400000);
+    return classes.filter(c => c.dayOffset === diffDays);
+  }
+
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < firstDay; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const selectedClasses = selectedDay ? getClassesForDay(selectedDay) : [];
+
+  return (
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "12px", padding: "24px", marginBottom: "24px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "18px" }}>
+        <button onClick={() => setMonthOffset(m => m - 1)} style={{ width: "32px", height: "32px", borderRadius: "6px", background: "var(--surface-2)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)", cursor: "pointer" }}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 3L4.5 7L8.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
+        <h2 style={{ fontSize: "16px", fontWeight: 700, textTransform: "capitalize" }}>{monthName}</h2>
+        <button onClick={() => setMonthOffset(m => m + 1)} style={{ width: "32px", height: "32px", borderRadius: "6px", background: "var(--surface-2)", border: "1px solid var(--border)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--text-muted)", cursor: "pointer" }}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 3L9.5 7L5.5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        </button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "2px", marginBottom: "4px" }}>
+        {days.map(d => <div key={d} style={{ textAlign: "center", fontSize: "10px", fontWeight: 700, color: "var(--text-muted)", padding: "6px 0", textTransform: "uppercase", letterSpacing: "0.06em" }}>{d}</div>)}
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: "2px" }}>
+        {cells.map((d, i) => {
+          if (!d) return <div key={`e${i}`} />;
+          const isToday = d === today.getDate() && monthOffset === 0;
+          const cls = getClassesForDay(d);
+          const hasClass = cls.length > 0;
+          const isSelected = selectedDay === d && monthOffset === 0;
+          const isPast = new Date(year, month, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+          return (
+            <button key={i} onClick={() => setSelectedDay(isSelected ? null : d)} style={{ padding: "8px 4px", borderRadius: "8px", textAlign: "center", cursor: hasClass ? "pointer" : "default", background: isSelected ? "rgba(232,93,4,0.12)" : isToday ? "rgba(232,93,4,0.06)" : "transparent", border: isSelected ? "1px solid rgba(232,93,4,0.4)" : isToday ? "1px solid rgba(232,93,4,0.2)" : "1px solid transparent", opacity: isPast ? 0.35 : 1, transition: "all 0.1s" }}>
+              <div style={{ fontSize: "13px", fontWeight: isToday ? 700 : 500, color: isToday ? "var(--orange)" : "var(--text)", marginBottom: "4px" }}>{d}</div>
+              {hasClass && <div style={{ display: "flex", gap: "2px", justifyContent: "center" }}>{cls.slice(0, 3).map((c, ci) => <div key={ci} style={{ width: "5px", height: "5px", borderRadius: "50%", background: c.color }} />)}</div>}
+            </button>
+          );
+        })}
+      </div>
+      {selectedDay && selectedClasses.length > 0 && (
+        <div style={{ marginTop: "16px", borderTop: "1px solid var(--border)", paddingTop: "14px" }}>
+          <div style={{ fontSize: "12px", fontWeight: 700, color: "var(--text-muted)", marginBottom: "10px", textTransform: "uppercase", letterSpacing: "0.06em" }}>{selectedDay}. {base.toLocaleDateString("no-NO", { month: "long" })}</div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            {selectedClasses.map(c => (
+              <div key={c.id} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "10px 12px", background: "var(--surface-2)", borderRadius: "8px", borderLeft: `3px solid ${c.color}` }}>
+                <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)", minWidth: "44px" }}>{c.time}</div>
+                <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--text)" }}>{c.name}</div>
+                <div style={{ fontSize: "11px", color: "var(--text-muted)", marginLeft: "auto" }}>{c.instructor} · {c.duration} min</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const [member, setMember] = useState<{ name: string; email: string; plan: string } | null>(null);
@@ -116,6 +188,9 @@ export default function DashboardPage() {
             </div>
           ))}
         </div>
+
+        {/* CALENDAR */}
+        <CalendarView classes={Object.values(CLASS_MAP)} today={today} />
 
         <div className="two-col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
           {/* UPCOMING */}
