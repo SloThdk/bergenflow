@@ -42,7 +42,10 @@ export default function DashboardPage() {
     try {
       const raw = sessionStorage.getItem("bf_member");
       if (!raw) { window.location.href = "https://bergen-fitness.pages.dev"; return; }
-      setMember(JSON.parse(raw));
+      const parsed = JSON.parse(raw);
+      setMember(parsed);
+      setToast(`Logget inn som ${parsed.name}`);
+      setTimeout(() => setToast(""), 2500);
       const b = sessionStorage.getItem("bf_bookings_flow");
       if (b) setBookedIds(JSON.parse(b));
     } catch { window.location.href = "https://bergen-fitness.pages.dev"; }
